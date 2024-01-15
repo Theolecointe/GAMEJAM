@@ -1,6 +1,8 @@
-﻿ using UnityEngine;
+﻿using System;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
+using static UnityEditor.FilePathAttribute;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -84,6 +86,8 @@ namespace StarterAssets
         private float _animationBlend;
         private float _targetRotation = 0.0f;
         private float _rotationVelocity;
+        float tamr = 0f;
+
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
 
@@ -110,6 +114,7 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
+        [SerializeField] Transform graphics;
         private bool IsCurrentDeviceMouse
         {
             get
@@ -192,6 +197,7 @@ namespace StarterAssets
 
         private void CameraRotation()
         {
+            return;
             // if there is an input and camera position is not fixed
             if (_input.look.sqrMagnitude >= _threshold && !LockCameraPosition)
             {
@@ -253,19 +259,24 @@ namespace StarterAssets
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
+            float rotation = transform.eulerAngles.y;
             if (_input.move != Vector2.zero)
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                                  _mainCamera.transform.eulerAngles.y;
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                                transform.eulerAngles.y;
+                rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                     RotationSmoothTime);
 
                 // rotate to face input direction relative to camera position
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
             }
+            Vector3 e = graphics.localEulerAngles;
+            float _targetRotationGraphics = 45 * -inputDirection.x;
+            e.z = Mathf.SmoothDampAngle(e.z, _targetRotationGraphics, ref tamr,
+                    RotationSmoothTime*0.5f);
+            graphics.localEulerAngles = e;
 
-
-            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+            Vector3 targetDirection = Quaternion.Euler(0.0f, rotation, 0.0f) * Vector3.forward;
 
             // move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
@@ -375,7 +386,7 @@ namespace StarterAssets
             {
                 if (FootstepAudioClips.Length > 0)
                 {
-                    var index = Random.Range(0, FootstepAudioClips.Length);
+                    var index = UnityEngine.Random.Range(0, FootstepAudioClips.Length);
                     AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
                 }
             }
