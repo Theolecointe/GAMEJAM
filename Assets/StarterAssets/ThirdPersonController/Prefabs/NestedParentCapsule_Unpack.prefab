@@ -47,7 +47,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474b45147842544438e8d177562e4677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToToggle: {fileID: 0}
+  fps: {fileID: 0}
+  tps: {fileID: 8047161636021232021}
+  velo: {fileID: 4443922794485095459}
+  playerCapsuleTps: {fileID: 6341998657737914581}
+  capsuleFps: {fileID: 0}
+  capsuleTps: {fileID: 4807976689976324956}
 --- !u!1001 &3515378427225392744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -451,6 +456,18 @@ PrefabInstance:
 --- !u!4 &1271951676961627225 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5989712861149121918, guid: 2553cec8fdb3eb643bbe9f2ec880c472,
+    type: 3}
+  m_PrefabInstance: {fileID: 4807976689997140263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4443922794485095459 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9156558494557064452, guid: 2553cec8fdb3eb643bbe9f2ec880c472,
+    type: 3}
+  m_PrefabInstance: {fileID: 4807976689997140263}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4807976689976324956 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 29811323, guid: 2553cec8fdb3eb643bbe9f2ec880c472,
     type: 3}
   m_PrefabInstance: {fileID: 4807976689997140263}
   m_PrefabAsset: {fileID: 0}
