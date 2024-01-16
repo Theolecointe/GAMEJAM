@@ -11,13 +11,13 @@ public class Livreur : MonoBehaviour
     {
         if (isHoldingItem)
         {
-            Debug.Log("Le joueur porte le Colis.");
+            Debug.Log("Le livreur porte le Colis.");
             return true;
 
         }
         else
         {
-            Debug.Log("Le joueur ne porte pas le Colis.");
+            Debug.Log("Le livreur ne porte pas le Colis.");
             return false;
         }
     }
