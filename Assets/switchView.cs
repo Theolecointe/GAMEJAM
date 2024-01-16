@@ -6,22 +6,60 @@ using UnityEngine.InputSystem;
 public class switchView : MonoBehaviour
 {
 
-    [SerializeField] GameObject objectToToggle; // L'objet à activer/désactiver
-    private KeyCode toggleKey = KeyCode.T;
+    [SerializeField] GameObject fps; // L'objet à activer/désactiver
+    [SerializeField] GameObject tps;
+    [SerializeField] GameObject velo;
+    [SerializeField] GameObject playerCapsuleTps;
+    [SerializeField] GameObject capsuleFps;
+    [SerializeField] GameObject capsuleTps;
+
+    Vector3 transformSponFps;  
+    
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
+    void mount()
+    { 
+        fps.SetActive(false);
+        tps.SetActive(true);
+        velo.transform.SetParent(playerCapsuleTps.transform); 
+    }
+
+
+
+    void unmount()
+    {
+        tps.SetActive(false);
+        fps.SetActive(true);
+        velo.transform.SetParent(null); 
+
+    }
     // Update is called once per frame
     void Update()
     {
 
-        if (Keyboard.current[Key.T].isPressed)
+        if (Keyboard.current[Key.E].isPressed)
         {
-            this.gameObject.SetActive(false);
-            objectToToggle.SetActive(true);
+            if (gameObject.name == "TPS")
+            {
+                transformSponFps = capsuleTps.transform.position;
+                unmount();
+                capsuleFps.transform.position = transformSponFps;
+            }
+            else
+            {
+                mount(); 
+            }
+            
+
+
         }
+
+
+
+
     }
 }
