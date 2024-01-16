@@ -15,10 +15,13 @@ public class Velo : MonoBehaviour
     [SerializeField] GameObject capsuleFps;
     [SerializeField] GameObject capsuleTps;
 
+    [SerializeField] GameObject cameraRoot;
+
     Vector3 transformSponFps;
 
     // Start is called before the first frame update
     Vector3 targetPosition;
+
 
     private Rigidbody veloRigidbody;
 
@@ -48,7 +51,6 @@ public class Velo : MonoBehaviour
 
         float veloVelocity = tpc._speed;
 
-        Debug.Log(veloVelocity); 
         
 
         if (veloVelocity == 0.0f)
@@ -88,10 +90,27 @@ public class Velo : MonoBehaviour
 
 
     }
+
+    void speedCheck()
+    {
+
+        ThirdPersonController tpc = capsuleTps.GetComponent<ThirdPersonController>();
+
+        float veloVelocity = tpc._speed;
+
+        Debug.Log(veloVelocity);
+
+
+    }
+
+
+
+
     // Update is called once per frame
     void Update()
     {
-      
+
+        speedCheck(); 
 
         if (Keyboard.current[Key.E].wasPressedThisFrame)
         {
