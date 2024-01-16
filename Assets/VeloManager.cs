@@ -98,7 +98,7 @@ public class Velo : MonoBehaviour
 
         float veloVelocity = tpc._speed;
 
-        Debug.Log(veloVelocity);
+        //Debug.Log(veloVelocity);
 
 
     }
