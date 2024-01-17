@@ -6,45 +6,55 @@ using UnityEngine.InputSystem;
 public class Récup : MonoBehaviour
 {
     [SerializeField] int nombreRandom;
-    [SerializeField] private bool isLivraison;
     [SerializeField] GameObject colis1;
     [SerializeField] GameObject colis2;
     [SerializeField] GameObject veloPivot;
-    [SerializeField]  
 
-    bool contact;
-    bool unColis = false; 
+    bool contactDump;
+    bool contactLoad; 
+    bool unColis = false;
 
-    Vector3 adjust = new Vector3 (0f, 1f, -1f);
+    bool depose = false; 
 
-
+    Vector3 adjust = new Vector3(0f, 1f, -1f);
 
     void OnTriggerEnter(Collider collider)
     {
+        string currentTag = gameObject.tag;
+
         Livreur livreur = collider.GetComponent<Livreur>();
         unColis = livreur.CheckIfHoldingItem();
-        contact = true; 
+        
 
-        if (isLivraison == true && unColis == true)
+        if (currentTag == "dump")
         {
-            Debug.Log("Vous avez livré le colis du client !");
-            livreur.Drop();
+            contactDump = true;
 
+            if (unColis)
+            {
+                Debug.Log("Vous avez livré le colis du client !");
+                livreur.Drop();
+                contactDump = true;
+                depose = false;
+
+            }
         }
-        else if(isLivraison == false && unColis == false)
+        
+        else if (currentTag == "Load")
         {
+            contactDump = true;
+
+            if(!unColis) 
             Debug.Log("Vous avez récupéré le colis du client !");
             livreur.PickUp();
 
-    
         }
-
-      
     }
 
     private void OnTriggerExit(Collider other)
     {
-        contact = false;
+        contactDump = false;
+        contactLoad = false; 
     }
 
 
@@ -53,30 +63,33 @@ public class Récup : MonoBehaviour
     {
 
 
-        
+
     }
 
     private void Update()
     {
-        if (Keyboard.current[Key.F].wasPressedThisFrame)
-        {
-            if (contact && !unColis)
-            {
-                Debug.Log("On charge");
-                colis1.transform.SetParent(veloPivot.transform);
-                colis1.transform.localPosition = Vector3.zero;
-                colis1.transform.localRotation = Quaternion.identity; 
-                
+         if (Keyboard.current[Key.F].wasPressedThisFrame)
+         {
+             if (!unColis && contactLoad)
+             {
+                 Debug.Log("On charge");
+                 colis1.transform.SetParent(veloPivot.transform);
+                 colis1.transform.localPosition = Vector3.zero;
+                 colis1.transform.localRotation = Quaternion.identity;
+                 depose = true;
+
+
+
 
             }
 
-        }
+         }
 
-        if(contact && unColis)
+        if (unColis && contactDump)
         {
             Debug.Log("On décharge");
             colis1.transform.SetParent(null);
-            colis1.transform.position = transform.position; 
+            colis1.transform.position = transform.position;
 
         }
     }
