@@ -42,11 +42,6 @@ public class veloMove : MonoBehaviour
         else
             myScript.SpeedChangeRate = decelerateForce;
 
-        if (Keyboard.current[Key.Q].isPressed)
-        {
-            corp.transform.rotation = angleRotation; 
-        }
-            
     }
 
 

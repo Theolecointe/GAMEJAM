@@ -1,3 +1,4 @@
+using StarterAssets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +8,12 @@ using UnityEngine.InputSystem;
 
 public class Récup : MonoBehaviour
 {
+    
     [SerializeField] private bool isLivraison;
+
+    [SerializeField] directionnalArrow directionnalArrow;
+    [SerializeField] GameObject depot;
+
     bool contact;
     Livreur livreur;
 
@@ -34,12 +40,20 @@ public class Récup : MonoBehaviour
 
     private void Update()
     {
-        if(isLivraison == false && livreur?.CheckIfHoldingItem() == false && contact && Keyboard.current[Key.F].wasPressedThisFrame)
+        ThirdPersonController tpc = livreur.GetComponent<ThirdPersonController>();
+
+        float veloVelocity = tpc._speed;
+
+        if (isLivraison == false && livreur?.CheckIfHoldingItem() == false && contact && Keyboard.current[Key.F].wasPressedThisFrame && veloVelocity <= 0.2f)
         {
             Debug.Log("Vous avez récupéré le colis du client !");
             livreur.PickUp();
             Debug.Log("On charge");
             livreur = null;
+
+
+            directionnalArrow.objectif = depot;
+            
         }
 
     }

@@ -5,7 +5,9 @@ using UnityEngine;
 public class directionnalArrow : MonoBehaviour
 {
 
-    [SerializeField] GameObject objectif; 
+    public GameObject objectif;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,7 @@ public class directionnalArrow : MonoBehaviour
 
         // Rétablir les rotations X et Z d'origine
         transform.eulerAngles = new Vector3(originalRotation.x, transform.eulerAngles.y, originalRotation.z);
+
 
     }
 }
