@@ -1,36 +1,70 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class HUD : MonoBehaviour
 {
     [SerializeField] TMP_Text argentText;
     [SerializeField] TMP_Text debugText;
-    // Start is called before the first frame update
-    void Start()
+
+    private int _montantDArgent;
+
+    private void Start()
     {
-        
+        MontantDArgent = 0;
+    }
+    int MontantDArgent
+    {
+        get
+        {
+            return _montantDArgent;
+        }
+        set
+        {
+            _montantDArgent = value;
+            UpdateMoney();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] ShopManager shopManager;
 
-    public void UpdateMoney(int money)
+    public void TryBuyItem(ShopItem item)
+    {
+        if (MontantDArgent >= item.cost)
+        {
+            shopManager.RemoveItem(item);
+            MontantDArgent -= item.cost;
+        }
+    }
+    private void UpdateMoney()
     {
         if (argentText != null)
         {
-            argentText.text = money + "$";
+            argentText.text = MontantDArgent + "$";
         }
+        shopManager?.UpdateCanBuy(MontantDArgent);
     }
     public void UpdateDebugText(string message)
     {
         if (debugText != null)
         {
             debugText.text = message;
+        }
+    }
+
+    public void AddMoney(int montantAjoute)
+    {
+        MontantDArgent += montantAjoute;
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current[Key.P].wasPressedThisFrame)
+        {
+            shopManager.ToggleShop();
         }
     }
 }
