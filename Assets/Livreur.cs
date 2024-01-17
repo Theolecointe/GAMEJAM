@@ -30,6 +30,9 @@ public class Livreur : MonoBehaviour
 
     internal void Drop()
     {
+        int montantAjoute = 100; 
+        montantDArgent += montantAjoute;
+
         hud.UpdateDebugText("Le livreur ne porte pas le colis.");
         hud.UpdateMoney(montantDArgent);
         colis.SetActive(false);
