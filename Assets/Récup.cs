@@ -12,10 +12,10 @@ public class Récup : MonoBehaviour
     [SerializeField] private bool isLivraison;
 
     [SerializeField] GameObject depot;
-
+    [SerializeField] GameObject recup; 
     bool contact;
     Livreur livreur;
-
+  
     void OnTriggerEnter(Collider collider)
     {
         livreur = collider.GetComponent<Livreur>();
@@ -26,6 +26,8 @@ public class Récup : MonoBehaviour
         {
             Debug.Log("Vous avez livré le colis du client !");
             livreur.Drop();
+            livreur.GetComponentInChildren<directionnalArrow>().objectif = recup;
+
         }
 
        
@@ -50,8 +52,14 @@ public class Récup : MonoBehaviour
             livreur.PickUp();
             Debug.Log("On charge");
             livreur.GetComponentInChildren<directionnalArrow>().objectif = depot;
-            livreur = null;
-        }
 
+            for (int i = 0; i < livreur.maxColis; i++)
+            {
+                Destroy(gameObject.transform.GetChild(i).gameObject);
+            }
+
+            livreur = null;
+
+        }
     }
 }
