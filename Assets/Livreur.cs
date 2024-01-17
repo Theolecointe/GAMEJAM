@@ -8,7 +8,6 @@ public class Livreur : MonoBehaviour
 
 {
     private bool isHoldingItem = false;
-    private int montantDArgent;
     [SerializeField] GameObject colis;
     HUD hud;
     private void Start()
@@ -28,13 +27,13 @@ public class Livreur : MonoBehaviour
         }
     }
 
+  
+
     internal void Drop()
     {
         int montantAjoute = 100; 
-        montantDArgent += montantAjoute;
-
         hud.UpdateDebugText("Le livreur ne porte pas le colis.");
-        hud.UpdateMoney(montantDArgent);
+        hud.AddMoney(montantAjoute);
         colis.SetActive(false);
         isHoldingItem = false;
     }
