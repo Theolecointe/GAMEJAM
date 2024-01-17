@@ -12,16 +12,16 @@ public class Récup : MonoBehaviour
     [SerializeField] GameObject colis1;
     [SerializeField] GameObject colis2;
     [SerializeField] GameObject veloPivot;
-    [SerializeField]  
+    [SerializeField]
 
     bool contact;
-    bool unColis = false; 
+    bool unColis = false;
 
-    Vector3 adjust = new Vector3 (0f, 1f, -1f);
+    Vector3 adjust = new Vector3(0f, 1f, -1f);
 
 
 
-    [SerializeField] private float montantAjoute = 10.0f; 
+    [SerializeField] private float montantAjoute = 10.0f;
     public GestionArgent gestionArgent;
     public TextMeshProUGUI argentText;
     private bool dejaTouchee = false;
@@ -30,7 +30,7 @@ public class Récup : MonoBehaviour
     {
         Livreur livreur = collider.GetComponent<Livreur>();
         unColis = livreur.CheckIfHoldingItem();
-        contact = true; 
+        contact = true;
 
         if (isLivraison == true && unColis == true)
         {
@@ -42,15 +42,15 @@ public class Récup : MonoBehaviour
             dejaTouchee = true;
 
         }
-        else if(isLivraison == false && unColis == false)
+        else if (isLivraison == false && unColis == false)
         {
             Debug.Log("Vous avez récupéré le colis du client !");
             livreur.PickUp();
 
-    
+
         }
 
-      
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -69,7 +69,7 @@ public class Récup : MonoBehaviour
     {
 
 
-        
+
     }
 
     private void Update()
@@ -81,30 +81,31 @@ public class Récup : MonoBehaviour
                 Debug.Log("On charge");
                 colis1.transform.SetParent(veloPivot.transform);
                 colis1.transform.localPosition = Vector3.zero;
-                colis1.transform.localRotation = Quaternion.identity; 
-                
+                colis1.transform.localRotation = Quaternion.identity;
+
 
             }
 
         }
 
-        if(contact && unColis)
+        if (contact && unColis)
         {
             Debug.Log("On décharge");
             colis1.transform.SetParent(null);
-            colis1.transform.position = transform.position; 
+            colis1.transform.position = transform.position;
 
         }
     }
-}
 
-}
 
-public class GestionArgent
-{
-    internal void AjouterArgent(float v)
+
+    public class GestionArgent
     {
-        throw new NotImplementedException();
+        internal void AjouterArgent(float v)
+        {
+            throw new NotImplementedException();
+        }
     }
-}
 
+
+}
