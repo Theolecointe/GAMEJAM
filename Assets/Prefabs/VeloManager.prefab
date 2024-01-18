@@ -205,6 +205,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_delivery_box
       objectReference: {fileID: 0}
+    - target: {fileID: 8515994001565909073, guid: 6390d95697dc08343b47802d50fdc1a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9035685127753161451, guid: 6390d95697dc08343b47802d50fdc1a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -260,6 +265,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6390d95697dc08343b47802d50fdc1a0, type: 3}
+--- !u!1 &8582868095846989903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8515994001565909073, guid: 6390d95697dc08343b47802d50fdc1a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 86301095454818334}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8959816504380889845 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9035685127753161451, guid: 6390d95697dc08343b47802d50fdc1a0,
@@ -777,9 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3718f9aaaefe96d47bd5f5276c22098c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugText: {fileID: 0}
-  argentText: {fileID: 0}
-  colis: {fileID: 0}
+  colis: {fileID: 8582868095846989903}
 --- !u!4 &7593685102713037201 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6001220780674294383, guid: 212907312655a4443a025a304442c17c,
