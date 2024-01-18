@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class Récup : MonoBehaviour
 {
     
-    [SerializeField] private bool isLivraison;
+    [SerializeField] public bool isLivraison;
 
     [SerializeField] GameObject depot;
     [SerializeField] GameObject recup; 
@@ -26,10 +26,16 @@ public class Récup : MonoBehaviour
         {
             Debug.Log("Vous avez livré le colis du client !");
             livreur.Drop();
-            livreur.GetComponentInChildren<directionnalArrow>().objectif = recup;
-
+            if(recup.activeSelf)
+            {
+                livreur.GetComponentInChildren<directionnalArrow>().objectif = recup;
+            }
+            else
+            {
+                gameObject.SetActive(false);
+                transform.parent.parent.GetComponent<ObjectifsManager>().NextPaire();
+            }
         }
-
        
     }
 
@@ -49,15 +55,16 @@ public class Récup : MonoBehaviour
         if (isLivraison == false && livreur?.CheckIfHoldingItem() == false && contact && Keyboard.current[Key.F].wasPressedThisFrame && veloVelocity <= 0.2f)
         {
             Debug.Log("Vous avez récupéré le colis du client !");
-            livreur.PickUp();
+            livreur.PickUp(transform.childCount);
             Debug.Log("On charge");
             livreur.GetComponentInChildren<directionnalArrow>().objectif = depot;
 
             for (int i = 0; i < livreur.maxColis; i++)
             {
-                Destroy(gameObject.transform.GetChild(i).gameObject);
+                if(i < transform.childCount)
+                    Destroy(gameObject.transform.GetChild(i).gameObject);
             }
-
+            
             livreur = null;
 
         }

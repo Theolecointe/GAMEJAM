@@ -250,7 +250,6 @@ namespace StarterAssets
             {
                 _speed = targetSpeed;
             }
-            Debug.Log(_input.move.y);
             //_speed = _speed*(Math.Abs(_input.move.y) > 0.1 ? 1.0f : 0.1f);
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);

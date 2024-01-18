@@ -37,6 +37,7 @@ public class HUD : MonoBehaviour
         {
             shopManager.RemoveItem(item);
             MontantDArgent -= item.cost;
+            FindObjectOfType<Livreur>().maxColis++;
         }
     }
     private void UpdateMoney()

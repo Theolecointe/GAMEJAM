@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class colisManager : MonoBehaviour
+public class ColisCount : MonoBehaviour
 
 {
     [SerializeField] GameObject prefabDelivery;
@@ -20,12 +20,6 @@ public class colisManager : MonoBehaviour
 
     }
 
-    void Start()
-    {
-
-        
-    }
-    
 
     // Update is called once per frame
     void Update()
