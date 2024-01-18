@@ -22,13 +22,14 @@ public class VeloMove : MonoBehaviour
 
     Quaternion angleRotation;
 
+    AudioSource audioData;
     // Start is called before the first frame update
     void Start()
     {
         myScript = GetComponent<ThirdPersonController>();
         //angleRotation = Quaternion.AngleAxis(10.35f, corp.transform.forward);
 
-
+      
     }
 
     // Update is called once per frame
@@ -43,6 +44,7 @@ public class VeloMove : MonoBehaviour
         else
             myScript.SpeedChangeRate = decelerateForce;
 
+       
 
     }
 
